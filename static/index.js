@@ -48,7 +48,6 @@
             closeWelcomeLayer();
         }
     }
-
     w.winOpen = function() {
         window.open(location.href + '?r=' + Math.random(), 'nWin', 'height=500,width=320,toolbar=no,menubar=no,scrollbars=no');
         let opened = window.open('about:blank', '_self');
