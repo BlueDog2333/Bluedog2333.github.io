@@ -1,4 +1,4 @@
-(function(w) {
+﻿(function(w) {
     let isDesktop = !navigator['userAgent'].match(/(ipad|iphone|ipod|android|windows phone)/i);
     let fontunit = isDesktop ? 20 : ((window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth) / 320) * 10;
     document.write('<style type="text/css">' +
@@ -122,6 +122,18 @@
 			src: "./static/music/tap1.mp3",
             id: "tap1"
 		});
+		createjs.Sound.registerSound({
+			src: "./static/music/tap2.mp3",
+            id: "tap2"
+		});
+		createjs.Sound.registerSound({
+			src: "./static/music/tap3.mp3",
+            id: "tap3"
+		});
+		createjs.Sound.registerSound({
+			src: "./static/music/end1.mp3",
+            id: "end1"
+		});
         gameRestart();
     }
 
@@ -188,7 +200,11 @@
             GameTimeLayer.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;时间到！';
             gameOver();
             GameLayerBG.className += ' flash';
+			if(Math.random()>0.7){
             createjs.Sound.play("end");
+			}else{
+				createjs.Sound.play("end1");
+			}
         } else {
             GameTimeLayer.innerHTML = creatTimeText(_gameTimeNum);
         }
@@ -269,11 +285,18 @@
                 gameStart();
             }
 			if(Math.random()>0.5){
+			if(Math.random()>0.5){
 				createjs.Sound.play("tap");
-			}else {
+			}else{
 				createjs.Sound.play("tap1");
 			}
-			
+			}else{
+				if(Math.random()>0.5){
+				createjs.Sound.play("tap2");
+			}else{
+				createjs.Sound.play("tap3");
+			}
+			}
             
             tar = document.getElementById(p.id);
             tar.className = tar.className.replace(_ttreg, ' tt$1');
@@ -281,7 +304,8 @@
             _gameScore++;
             gameLayerMoveNextRow();
         } else if (_gameStart && !tar.notEmpty) {
-            createjs.Sound.play("err");
+          
+             createjs.Sound.play("err");
             gameOver();
             tar.className += ' bad';
         }
